@@ -11,6 +11,34 @@ This lets you do that.
 3. Open `http://www.websocket.org/echo.html` in your browser
 4. Try it out using `ws://localhost:1234/proxy/ws://echo.websocket.org`
 
+
+## Advanced Usage: Connect multiple devtool frontends simultaneously
+
+```shell
+# install the proxy server
+npm install ws-multi-proxy
+
+# launch the basic proxy server
+node ./node_modules/ws-multi-proxy/index.js 9023 &
+
+# launch a browser with remote webkit inspector server enabled
+open -a "Google Chrome Canary" --args --remote-debugging-port=9222 --user-data-dir="$TMPDIR/.chrome-user-data" about:blank
+
+# find the first available debugger socket
+DEBUGGER_SOCKET=$(curl -s "http://localhost:9222/json"|grep webSocketDebuggerUrl|cut -d'"' -f4| head -1)
+
+# inspector client 1
+open -a "Google Chrome Canary" "http://trac.webkit.org/export/116497/trunk/Source/WebCore/inspector/front-end/inspector.html?ws=localhost:9023/proxy/$DEBUGGER_SOCKET"
+
+# inspector client 2
+open -a "Google Chrome Canary" "http://trac.webkit.org/export/116497/trunk/Source/WebCore/inspector/front-end/inspector.html?ws=localhost:9023/proxy/$DEBUGGER_SOCKET"
+
+# etc...
+```
+
+Yay, multiple clients connected to the same inspector session at once.
+
+
 ## Advanced Usage
 
 ws-multi-proxy is pretty simple wrapper around the `ws` module's `WebSocketServer`.
