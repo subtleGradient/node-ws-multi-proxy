@@ -7,6 +7,7 @@ This lets you do that.
 
 ## Usage
 
+0. Require it `var WebSocketProxy = require('ws-multi-proxy').WebSocketProxy`
 1. Setup a proxy server `var proxy = new WebSocketProxy({ debug:true, webSocketServer:{ port:1234 } })`
 3. Open `http://www.websocket.org/echo.html` in your browser
 4. Try it out using `ws://localhost:1234/proxy/ws://echo.websocket.org`
