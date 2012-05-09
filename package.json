@@ -1,0 +1,17 @@
+{
+  "name": "ws-multi-proxy",
+  "version": "0.2.0",
+  "description": "Many to many WebSocket proxy server with pluggable routing logic. e.g. Take a bunch of existing WebSocket servers that only accept a single client connection and allow it to be used with multiple clients at once.",
+  "author": "Thomas Aylott <thomas@subtlegradient.com> (http://subtlegradient.com/)",
+  "keywords": [ "websocket", "proxy", "multiplex", "socket" ],
+  "repository": { "type": "git", "url": "https://github.com/subtleGradient/node-ws-multi-proxy.git" },
+  "bugs": "https://github.com/subtleGradient/node-ws-multi-proxy/issues",
+  "dependencies":{
+    "ws":"~0.4"
+  },
+  "devDependencies":{
+    "request":"*"
+  },
+  "license":"MIT",
+  "copyright":"Copyright © 2012 Facebook"
+}
