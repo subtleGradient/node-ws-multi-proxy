@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset=utf-8>
+<script>document.title = location.pathname.split('/').slice(-2)[0]</script>
+
+<script>
+var WebSocketProxy = require('./index').WebSocketProxy
+
+var port = 9023
+var proxy = new WebSocketProxy({ debug:true, webSocketServer:{ port:port } })
+console.warn('WebSocketProxy server started on port '+port+'')
+console.log('ws://localhost:'+port+'/proxy/ws://echo.websocket.org')
+
+window.onunload = function(){
+  proxy.webSocketServer.close()
+}
+
+function previewProxyUrl(url){
+  return 'ws://localhost:'+port+'/proxy/ws://' + encodeURIComponent(url.replace('ws://',''))
+}
+
+
+</script>
+
+<input id=previewInput onkeyup="this.onchange()" onchange="previewLinkInput.value = previewLink.href = previewLink.innerText = previewProxyUrl(value); previewLinkInput.size = previewLinkInput.value.length + 8" placeholder="echo.websocket.org" value="echo.websocket.org">
+<br><a id=previewLink href=""></a>
+<br><input id=previewLinkInput readonly onclick="select()">
+
+<script>previewInput.onchange()</script>
