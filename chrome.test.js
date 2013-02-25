@@ -65,6 +65,7 @@ exports.testChrome = function(WebSocketProxy){
       console.assert(result.value === 6 * 7)
     })
     Runtime_evaluate("location", function(error, result){})
+    Runtime_evaluate("document.body.innerHTML = 'Hello from node-ws-multi-proxy!'", function(error, result){})
     
   })
 }
